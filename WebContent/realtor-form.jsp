@@ -42,19 +42,22 @@
 	</div>
 
 	<!-- File Button -->
-	<c:if test="${!empty toEdit }">
-		<figure class="image is-128x128">
-			<!-- pass the the url data back to the servlet for the image -->
-			<img
-				src="imageServlet?type=realtor&id=${param.id }"
-				alt="${param.name }"
-				title="${param.name }">
-		</figure>
-	</c:if>
-
-	<label
-		class="label"
-		for="photo">Photo</label>
+	<c:choose>
+		<c:when test="${!empty toEdit }">
+			<figure class="image is-128x128">
+				<!-- pass the the url data back to the servlet for the image -->
+				<img
+					src="imageServlet?type=realtor&id=${param.id }"
+					alt="${param.name }"
+					title="${param.name }">
+			</figure>
+		</c:when>
+		<c:otherwise>
+			<label
+				class="label"
+				for="photo">Photo</label>
+		</c:otherwise>
+	</c:choose>
 
 	<div class="file">
 		<label class="file-label"> <input

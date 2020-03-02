@@ -2,20 +2,21 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
+
+import java.util.List;
 
 /**
  * The persistent class for the realtor database table.
  * 
  */
 @Entity
-@NamedQuery(name="Realtor.findAll", query="SELECT r FROM Realtor r")
+@NamedQuery(name = "Realtor.findAll", query = "SELECT r FROM Realtor r")
 public class Realtor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	private String description;
@@ -25,8 +26,8 @@ public class Realtor implements Serializable {
 	@Lob
 	private byte[] picture;
 
-	//bi-directional many-to-one association to ListingDetail
-	@OneToMany(mappedBy="realtor", cascade = CascadeType.ALL)
+	// bi-directional many-to-one association to ListingDetail
+	@OneToMany(mappedBy = "realtor", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.EAGER)
 	private List<ListingDetail> listingDetails;
 
 	public Realtor() {

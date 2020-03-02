@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.19, for osx10.15 (x86_64)
 --
 -- Host: localhost    Database: realestate
 -- ------------------------------------------------------
@@ -31,7 +31,7 @@ CREATE TABLE `address` (
   `zip` int NOT NULL,
   `apt_suite` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `listing_detail` (
   `description` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `num_bedrooms` float DEFAULT NULL,
   `num_baths` float NOT NULL,
-  `realtor_id` int NOT NULL,
+  `realtor_id` int DEFAULT NULL,
   `price` int DEFAULT NULL,
   `adress_id` int NOT NULL,
   `photo` mediumblob,
@@ -54,9 +54,9 @@ CREATE TABLE `listing_detail` (
   PRIMARY KEY (`id`),
   KEY `listing_detail_FK_1` (`adress_id`),
   KEY `listing_detail_FK` (`realtor_id`),
-  CONSTRAINT `listing_detail_FK` FOREIGN KEY (`realtor_id`) REFERENCES `realtor` (`id`),
-  CONSTRAINT `listing_detail_FK_1` FOREIGN KEY (`adress_id`) REFERENCES `address` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `listing_detail_FK` FOREIGN KEY (`adress_id`) REFERENCES `address` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `listing_detail_FK_1` FOREIGN KEY (`realtor_id`) REFERENCES `realtor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +72,7 @@ CREATE TABLE `realtor` (
   `description` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `picture` mediumblob,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,4 +88,4 @@ CREATE TABLE `realtor` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-01 15:08:35
+-- Dump completed on 2020-03-02 12:00:21
